@@ -1,0 +1,97 @@
+
+#create two relationship table
+# one-to-many
+
+CREATE TABLE teacher(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  surname VARCHAR (255) NOT NULL
+  );
+
+show tables;
+show columns FROM teacher;
+
+CREATE TABLE lesson(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR (255) NOT NULL,
+  teacher_id INT NOT NULL,
+  FOREIGN KEY (teacher_id) references teacher(id)
+  );
+
+show tables;
+show columns FROM lesson;
+
+#filling data in tables
+
+INSERT INTO teacher (surname) values ("Raboshuk");
+INSERT INTO teacher (surname) values ("Oliinyk");
+INSERT INTO teacher (surname) values ("Grabar");
+INSERT INTO teacher (surname) values ("Oliinyk");
+INSERT INTO teacher (surname) values ("Vasyliuk");
+INSERT INTO teacher (surname) values ("Oliinyk");
+
+SELECT *FROM test.teacher;
+SELECT id FROM test.teacher;
+SELECT DISTINCT surname FROM teacher;
+SELECT *FROM teacher WHERE id=1;
+SELECT *FROM teacher WHERE id>1;
+SELECT *FROM teacher WHERE surname = "Raboshuk";
+SELECT *FROM teacher WHERE surname = "Raboshuk" LIMIT 1;
+SELECT id AS 'Identification', surname AS 'Sur' FROM teacher; #rename column header
+
+SELECT *FROM teacher ORDER BY surname; #sorting
+SELECT *FROM teacher ORDER BY id; #sorting
+SELECT *FROM teacher ORDER BY id DESC; #reverse sorting
+
+SELECT *FROM teacher WHERE surname LIKE "%uk"; #sorting by pattern
+SELECT *FROM teacher WHERE surname LIKE "%yk"; #sorting by pattern
+SELECT *FROM teacher WHERE surname LIKE "R%uk"; #sorting by pattern
+
+#sorting
+SELECT *FROM teacher WHERE id > 3 AND age < 45; #sorting by logic operators
+SELECT *FROM teacher WHERE id > 4 OR age < 31; #sorting by logic operators
+SELECT *FROM teacher WHERE age BETWEEN 35 AND 45; # between two values
+
+#joining tables
+SELECT teacher.surname, lesson.name FROM teacher INNER JOIN lesson ON teacher.id = lesson.teacher_id; #only teachers who have lessons
+SELECT teacher.surname, lesson.name FROM teacher LEFT OUTER JOIN lesson ON teacher.id = lesson.teacher_id; #all teachers from left tables
+SELECT teacher.surname, lesson.name FROM teacher RIGHT OUTER JOIN lesson ON teacher.id = lesson.teacher_id; #all lessons from right tables
+SELECT * FROM teacher UNION SELECT * FROM lesson; #join all
+
+#aggregate function
+SELECT AVG(age) FROM teacher; #calculation the average value
+SELECT MAX(age), MIN(age) FROM teacher; #finding the max and min value
+SELECT SUM(age) FROM teacher; #calculation the summ
+
+#grupping results
+SELECT age, COUNT(age) FROM teacher GROUP BY age;
+
+
+
+
+
+
+ALTER TABLE teacher ADD age INT; #add new field
+
+UPDATE teacher SET age=20 where id =1; #update data
+UPDATE teacher SET age=25; #update all data
+
+DELETE FROM teacher WHERE id = 6; delete by id
+
+INSERT INTO lesson (name, teacher_id) VALUES ("Mathematics",1), ("Informatics",1), ("Geography",2), ("Physics", 3); #add multiple entries
+INSERT INTO teacher (surname, age) VALUES ("Gorokh",25), ("Melnyk",30);
+
+SELECT teacher.surname, lesson.name FROM teacher INNER JOIN lesson ON teacher.id = lesson.teacher_id; #only teachers who have lessons
+SELECT teacher.surname, lesson.name FROM teacher LEFT OUTER JOIN lesson ON teacher.id = lesson.teacher_id; #all teachers from left tables
+SELECT teacher.surname, lesson.name FROM teacher RIGHT OUTER JOIN lesson ON teacher.id = lesson.teacher_id; #all lessons from right tables
+
+
+
+
+
+
+
+
+
+
+
+
