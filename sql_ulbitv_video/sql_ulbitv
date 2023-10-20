@@ -1,3 +1,12 @@
+Normal Form Batabase:
+1. One cell one value.
+2. Each entry must have an ID.
+
+Connection between table:
+  one-to-many  
+  one to-one
+  many-to-many
+
 
 #create two relationship table
 # one-to-many
